@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Pet</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script>
+        function addVaccineField() {
+            const vaccinesContainer = document.getElementById('vaccines-container');
+            const index = vaccinesContainer.children.length;
+
+            const vaccineDiv = document.createElement('div');
+            vaccineDiv.innerHTML = `
+                <label for="vaccines[${index}].name">Vaccine Name:</label>
+                <input type="text" id="vaccines[${index}].name" name="vaccines[${index}].name" required>
+                <label for="vaccines[${index}].dateAdministered">Date Administered:</label>
+                <input type="date" id="vaccines[${index}].dateAdministered" name="vaccines[${index}].dateAdministered" required>
+                <button type="button" onclick="removeVaccineField(this)">Remove</button>
+                <br>
+            `;
+            vaccinesContainer.appendChild(vaccineDiv);
+        }
+
+        function removeVaccineField(button) {
+            const vaccineDiv = button.parentNode;
+            vaccineDiv.remove();
+        }
+    </script>
+</head>
+<body>
+<h1>Add Pet</h1>
+<form th:action="@{/pets/add}" th:object="${pet}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" required><br>
+    <label for="species">Species:</label>
+    <input type="text" id="species" th:field="*{species}" required><br>
+    <label for="breed">Breed:</label>
+    <input type="text" id="breed" th:field="*{breed}"><br>
+    <label for="birthdate">Birthdate:</label>
+    <input type="date" id="birthdate" th:field="*{birthdate}"><br>
+
+    <h2>Vaccines</h2>
+    <div id="vaccines-container"></div>
+    <button type="button" onclick="addVaccineField()">Add Vaccine</button>
+    <br><br>
+
+    <input type="submit" value="Add Pet">
+</form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Pet Tracker</h1>
+<a th:href="@{/pets/add}">Add New Pet</a>
+<ul>
+    <li th:each="pet : ${pets}">
+        <a th:href="@{/pets/view/{id}(id=${pet.id})}" th:text="${pet.name}">Pet Name</a>
+    </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Pet</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1 th:text="${pet.name}">Pet Name</h1>
+<p>Species: <span th:text="${pet.species}">Species</span></p>
+<p>Breed: <span th:text="${pet.breed}">Breed</span></p>
+<p>Birthdate: <span th:text="${pet.birthdate}">Birthdate</span></p>
+<h2>Vaccines</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Date Administered</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vaccine : ${pet.vaccines}">
+        <td th:text="${vaccine.name}">Vaccine Name</td>
+        <td th:text="${vaccine.dateAdministered}">Date Administered</td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/pets/}">Back to List</a>
+</body>
+</html>
